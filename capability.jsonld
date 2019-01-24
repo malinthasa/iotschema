@@ -18,7 +18,9 @@
 		{
 			"@id": "iot:Temperature",
 			"@id": "iot:TargetTemperature",
-			"@id": "iot:BinarySwitch",
+			"@id": "iot:SwitchStatus",
+			"@id": "iot:TurnOn",
+			"@id": "iot:TurnOff",
 			"@id": "iot:RunMode",
 			"@id": "iot:CountDown",
 			"@id": "iot:WindStrength"
@@ -53,29 +55,6 @@
 		"iot:providesInteractionPattern": [
 		{
 			"@id": "iot:Illuminance"
-		}]
-	},
-	{
-		"@id": "iot:LightControl",
-		"@type": "rdfs:Class",
-		"rdfs:subClassOf": { "@id": "iot:Capability" },
-		"rdfs:comment": "A capability for controlling a light source, such as an RGB or other light.",
-		"rdfs:label": "LightControl",
-		"iot:domain": [
-			{"@id": "iot:Home"},
-			{"@id": "iot:Building"}
-			],
-		"iot:providesInteractionPattern": [
-		{
-			"@id": "iot:BinarySwitch",
-			"@id": "iot:SwitchStatus",
-			"@id": "iot:TurnOn",
-			"@id": "iot:TurnOff",
-			"@id": "iot:CurrentColour",
-			"@id": "iot:SetColour",
-			"@id": "iot:CurrentDimmer",
-			"@id": "iot:SetDimmer",
-			"@id": "iot:RampTime"
 		}]
 	},
 	{
@@ -206,21 +185,190 @@
 			"@id": "iot:ExpectedPressure"
 		}]
 	},
-  {
-  	"@id": "iot:SoundPressure",
-  	"@type": "rdfs:Class",
-  	"rdfs:subClassOf": { "@id": "iot:Capability" },
-  	"rdfs:comment": "Sensed Sound Pressure Level, e.g. using a microphone",
-  	"rdfs:label": "SoundPressureCapability",
-  	"iot:domain": [
-  		{"@id": "iot:Home"},
-  		{"@id": "iot:Building"}
-  		],
-  	"iot:providesInteractionPattern": [
-  	  {
-  		"@id": "iot:SoundPressureLevel"
-  	  }
-    ]
-  }
+	{
+		"@id": "iot:SoundPressure",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "Sensed Sound Pressure Level, e.g. using a microphone",
+		"rdfs:label": "SoundPressureCapability",
+		"iot:domain": [
+			{"@id": "iot:Home"},
+			{"@id": "iot:Building"}
+			],
+		"iot:providesInteractionPattern": [
+		  {
+			"@id": "iot:SoundPressureLevel"
+		  }
+		]
+	},
+	{
+		"@id": "iot:BinarySwitchControl",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A general On/Off control capability",
+		"rdfs:label": "BinarySwitchControl",
+		"iot:domain": [
+			{"@id": "iot:Home"},
+			{"@id": "iot:Building"},
+			{"@id": "iot:Industry"}
+			],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:SwitchStatus",
+			"@id": "iot:TurnOn",
+			"@id": "iot:TurnOff",
+			"@id": "iot:ToggleAction"
+		}]
+	},
+	{
+		"@id": "iot:DimmerControl",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A light dimmer control capability.",
+		"rdfs:label": "DimmerControl",
+		"iot:domain": [
+			{"@id": "iot:Home"},
+			{"@id": "iot:Building"}
+			],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:CurrentDimmer",
+			"@id": "iot:SetDimmerAction",
+			"@id": "iot:RampTime"
+		}]
+	},
+	{
+		"@id": "iot:ColourControl",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "The capability to set a color, e.g. for a colored light.",
+		"rdfs:label": "ColourControl",
+		"iot:domain": [
+			{"@id": "iot:Home"},
+			{"@id": "iot:Building"}
+			],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:CurrentColour",
+			"@id": "iot:SetColour"
+		}]
+	},
+	{
+		"@id": "iot:AmbientAir",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A capability to monitor gases in ambient air. Ambient air refers to any unconfined portion of the atmosphere or outdoor air.",
+		"rdfs:label": "AmbientAir",
+		"iot:domain": [
+				{"@id": "iot:Building"},
+				{"@id": "iot:Industry"},
+				{"@id": "iot:Home"}
+				],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:NitrogenConcentration",
+			"@id": "iot:OxygenConcentration",
+			"@id": "iot:CarbonDioxideConcentration",
+			"@id": "iot:ArgonConcentration"
+		}]
+	},
+	{
+		"@id": "iot:PowerMonitoring",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A capability for power monitoring in an electric circuit.",
+		"rdfs:label": "PowerMonitoring",
+		"iot:domain": [
+				{"@id": "iot:Energy"},
+				{"@id": "iot:Building"},
+				{"@id": "iot:Industry"},
+				{"@id": "iot:Home"}
+				],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:ApparentPowerA",
+			"@id": "iot:ApparentPowerB",
+			"@id": "iot:ApparentPowerC",
+			"@id": "iot:TotalApparentPower",
+			"@id": "iot:ActivePowerA",
+			"@id": "iot:ActivePowerB",
+			"@id": "iot:ActivePowerC",
+			"@id": "iot:TotalActivePower",
+			"@id": "iot:ReactivePowerA",
+			"@id": "iot:ReactivePowerB",
+			"@id": "iot:ReactivePowerC",
+			"@id": "iot:TotalReactivePower",
+			"@id": "iot:PowerFactorA",
+			"@id": "iot:PowerFactorB",
+			"@id": "iot:PowerFactorC",
+			"@id": "iot:TotalPowerFactor"
+		}]
+	},	
+	{
+		"@id": "iot:ElectricCurrentMonitoring",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A capability for current monitoring in an electric circuit.",
+		"rdfs:label": "ElectricCurrentMonitoring",
+		"iot:domain": [
+				{"@id": "iot:Energy"},
+				{"@id": "iot:Building"},
+				{"@id": "iot:Industry"},
+				{"@id": "iot:Home"}
+				],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:ElectricCurrentA",
+			"@id": "iot:ElectricCurrentB",
+			"@id": "iot:ElectricCurrentC",
+			"@id": "iot:AverageElectricCurrent",
+			"@id": "iot:LineFrequency"
+		}]
+	},	
+	{
+		"@id": "iot:VoltageMonitoring",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A capability for voltage monitoring in an electric circuit.",
+		"rdfs:label": "VoltageMonitoring",
+		"iot:domain": [
+				{"@id": "iot:Energy"},
+				{"@id": "iot:Building"},
+				{"@id": "iot:Industry"},
+				{"@id": "iot:Home"}
+				],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:PhaseToNeutralVoltageA",
+			"@id": "iot:PhaseToNeutralVoltageB",
+			"@id": "iot:PhaseToNeutralVoltageC",
+			"@id": "iot:PhaseToPhaseVoltageAB",
+			"@id": "iot:PhaseToPhaseVoltageBC",
+			"@id": "iot:PhaseToPhaseVoltageCA",
+			"@id": "iot:AveragePhaseToNeutralVoltage",
+			"@id": "iot:AveragePhaseToPhaseVoltage"
+		}]
+	},	
+	{
+		"@id": "iot:EnergyMonitoring",
+		"@type": "rdfs:Class",
+		"rdfs:subClassOf": { "@id": "iot:Capability" },
+		"rdfs:comment": "A capability for energy monitoring in an electric circuit.",
+		"rdfs:label": "EnergyMonitoring",
+		"iot:domain": [
+				{"@id": "iot:Energy"},
+				{"@id": "iot:Building"},
+				{"@id": "iot:Industry"},
+				{"@id": "iot:Home"}
+				],
+		"iot:providesInteractionPattern": [
+		{
+			"@id": "iot:ApparentEnergy",
+			"@id": "iot:ActiveEnergyImported",
+			"@id": "iot:ActiveEnergyExported",
+			"@id": "iot:ReactiveEnergyImported",
+			"@id": "iot:ReactiveEnergyExported"
+		}]
+	}
 	]
 }
